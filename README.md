@@ -1,5 +1,5 @@
 <div align="center">
-
+##This is a GSD 2 copied copy of GSD 2 for debugging purposes. Geromet has no rights. Original GSD 2 license always applies.
 # GSD 2
 
 **The evolution of [Get Shit Done](https://github.com/gsd-build/get-shit-done) — now a real coding agent.**
