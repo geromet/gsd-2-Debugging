@@ -37,7 +37,7 @@ pub struct TruncateOutputResult {
 /// required, the output ends at the last newline boundary that fits within
 /// the byte budget. UTF-8 boundaries are respected because we split on `\n`
 /// which is always a single byte.
-#[napi(js_name = "truncateTail")]
+#[napi(js_name = "truncateTail", catch_unwind)]
 pub fn truncate_tail(text: String, max_bytes: u32) -> TruncateResult {
     let max = max_bytes as usize;
     let total_bytes = text.len();
@@ -86,7 +86,7 @@ pub fn truncate_tail(text: String, max_bytes: u32) -> TruncateResult {
 /// The output starts at the first line boundary after skipping enough bytes
 /// from the front. UTF-8 boundaries are respected because we only split on
 /// `\n`.
-#[napi(js_name = "truncateHead")]
+#[napi(js_name = "truncateHead", catch_unwind)]
 pub fn truncate_head(text: String, max_bytes: u32) -> TruncateResult {
     let max = max_bytes as usize;
     let total_bytes = text.len();
@@ -138,7 +138,7 @@ pub fn truncate_head(text: String, max_bytes: u32) -> TruncateResult {
 /// - `"tail"` (default): keep the beginning (head truncation removes tail)
 /// - `"head"`: keep the end (tail truncation removes head)
 /// - `"both"`: keep beginning and end, elide the middle
-#[napi(js_name = "truncateOutput")]
+#[napi(js_name = "truncateOutput", catch_unwind)]
 pub fn truncate_output(
     text: String,
     max_bytes: u32,
