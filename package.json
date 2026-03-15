@@ -17,6 +17,7 @@
   ],
   "bin": {
     "gsd": "dist/loader.js",
+    "gsd-debug": "dist/loader.js",
     "gsd-cli": "dist/loader.js"
   },
   "files": [
