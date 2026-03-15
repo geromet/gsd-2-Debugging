@@ -157,7 +157,11 @@ export async function truncateTail(
 
   try {
     const start = performance.now();
-    const result = _truncateTailSync(text, maxBytes);
+    // Use Promise.race to enforce timeout
+    const result = await Promise.race([
+      Promise.resolve(_truncateTailSync(text, maxBytes)),
+      timeoutPromise,
+    ]);
     const duration = performance.now() - start;
     if (duration > 1000) {
       console.warn(`[truncate] truncateTail took ${duration.toFixed(2)}ms for ${text.length} bytes`);
@@ -189,7 +193,11 @@ export async function truncateHead(
 
   try {
     const start = performance.now();
-    const result = _truncateHeadSync(text, maxBytes);
+    // Use Promise.race to enforce timeout
+    const result = await Promise.race([
+      Promise.resolve(_truncateHeadSync(text, maxBytes)),
+      timeoutPromise,
+    ]);
     const duration = performance.now() - start;
     if (duration > 1000) {
       console.warn(`[truncate] truncateHead took ${duration.toFixed(2)}ms for ${text.length} bytes`);
@@ -222,7 +230,11 @@ export async function truncateOutput(
 
   try {
     const start = performance.now();
-    const result = _truncateOutputSync(text, maxBytes, mode);
+    // Use Promise.race to enforce timeout
+    const result = await Promise.race([
+      Promise.resolve(_truncateOutputSync(text, maxBytes, mode)),
+      timeoutPromise,
+    ]);
     const duration = performance.now() - start;
     if (duration > 1000) {
       console.warn(`[truncate] truncateOutput took ${duration.toFixed(2)}ms for ${text.length} bytes`);
